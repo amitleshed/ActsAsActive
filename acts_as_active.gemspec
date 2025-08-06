@@ -35,7 +35,7 @@ Gem::Specification.new do |spec|
   # spec.add_dependency "example-gem", "~> 1.0"
   spec.add_dependency "activesupport", ">= 7.0"
   spec.add_dependency "activerecord", ">= 7.0"
-  spec.add_development_dependency "sqlite3", "~> 1.4"
+  spec.add_development_dependency "sqlite3", ">= 2.1"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html

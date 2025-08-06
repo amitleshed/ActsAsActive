@@ -57,8 +57,8 @@ GEM
     reline (0.6.2)
       io-console (~> 0.5)
     securerandom (0.4.1)
-    sqlite3 (1.7.3-arm64-darwin)
-    sqlite3 (1.7.3-x86_64-linux)
+    sqlite3 (2.7.3-arm64-darwin)
+    sqlite3 (2.7.3-x86_64-linux-gnu)
     stringio (3.1.7)
     timeout (0.4.3)
     tzinfo (2.0.6)
@@ -74,7 +74,7 @@ DEPENDENCIES
   irb
   minitest (~> 5.16)
   rake (~> 13.0)
-  sqlite3 (~> 1.4)
+  sqlite3 (>= 2.1)
 
 BUNDLED WITH
    2.7.0
