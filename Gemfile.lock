@@ -57,6 +57,7 @@ GEM
     reline (0.6.2)
       io-console (~> 0.5)
     securerandom (0.4.1)
+    sqlite3 (1.7.3-arm64-darwin)
     stringio (3.1.7)
     timeout (0.4.3)
     tzinfo (2.0.6)
@@ -65,13 +66,13 @@ GEM
 
 PLATFORMS
   arm64-darwin-24
-  ruby
 
 DEPENDENCIES
   acts_as_active!
   irb
   minitest (~> 5.16)
   rake (~> 13.0)
+  sqlite3 (~> 1.4)
 
 BUNDLED WITH
    2.7.0
