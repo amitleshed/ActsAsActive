@@ -9,14 +9,15 @@ module ActsAsActive
       
       events.each do |event|
         next unless supported.include?(event)
-        after_commit -> { record_activity }, on: event
+        after_commit -> { record_activity(event) }, on: event
       end
     end
   end
 
   private
 
-  def record_activity
-    Rails.logger.info "[ActsAsActive] Recorded activity for #{self.class.name}##{id}"
+  def record_activity(event)
+    Rails.logger.info "[ActsAsActive] Recorded #{event} for #{self.inspect}"
+    self.activities.create(occurred_on: Time.now.to_date)
   end
 end

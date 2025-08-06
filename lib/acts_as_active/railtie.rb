@@ -6,5 +6,9 @@ module ActsAsActive
         ActiveRecord::Base.include ActsAsActive
       end
     end
+
+    generators do
+      require_relative "../generators/acts_as_active/install_generator"
+    end
   end
 end
