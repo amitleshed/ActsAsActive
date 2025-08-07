@@ -46,7 +46,7 @@ module InstanceMethods
   def activity_count(range:)
     self.activities.where(occurred_on: range).sum(:count)
   end
-  
+
   def heatmap(range:)
     activity_data = activities.where(occurred_on: range).pluck(:occurred_on, :count)
   
@@ -56,8 +56,10 @@ module InstanceMethods
   end
 
   def longest_streak
+    # IMPLEMENT
   end
 
   def current_streak
+    # IMPLEMENT
   end
 end

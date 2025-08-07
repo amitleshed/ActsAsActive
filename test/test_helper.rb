@@ -4,8 +4,13 @@ $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 require "acts_as_active"
 require "minitest/autorun"
 require "active_record"
+require "active_support/testing/time_helpers"
 require "logger"
 require_relative "../lib/acts_as_active/concern"
+
+class Minitest::Test
+  include ActiveSupport::Testing::TimeHelpers
+end
 
 ActiveRecord::Base.include ActsAsActive
 ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")
