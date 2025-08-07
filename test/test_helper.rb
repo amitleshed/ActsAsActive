@@ -16,7 +16,7 @@ ActiveRecord::Schema.define do
     t.string  :trackable_type, null: false
     t.integer :trackable_id,   null: false
     t.date    :occurred_on,    null: false
-    t.integer :count,          default: 1, null: false
+    t.integer :count,          default: 0, null: false
     t.timestamps
   end
   add_index :activities, [:trackable_type, :trackable_id, :occurred_on], unique: true

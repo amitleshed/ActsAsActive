@@ -25,9 +25,11 @@ module ActsAsActive
 
 
   def record_activity!(at: Time.current)
-    today = at.to_date
+    today    = at.to_date
     activity = activities.find_or_initialize_by(occurred_on: today)
-    activity.count = (activity.count || 0) + 1
+  
+    activity.count ||= 0
+    activity.count  += 1
     activity.save!
   end
 end
@@ -42,10 +44,15 @@ module InstanceMethods
   end
 
   def activity_count(range:)
-    self.activities.where(occurred_on: range).size
+    self.activities.where(occurred_on: range).sum(:count)
   end
-
+  
   def heatmap(range:)
+    activity_data = activities.where(occurred_on: range).pluck(:occurred_on, :count)
+  
+    activity_data.each_with_object(Hash.new(0)) do |(date, count), hash|
+      hash[date.to_s] = count
+    end
   end
 
   def longest_streak
