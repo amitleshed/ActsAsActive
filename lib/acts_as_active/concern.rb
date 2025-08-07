@@ -56,10 +56,32 @@ module InstanceMethods
   end
 
   def longest_streak
-    # IMPLEMENT
-  end
+    dates = activities.pluck(:occurred_on).uniq.sort
+    return 0 if dates.empty?
+  
+    longest = current = 1
+    dates.each_cons(2) do |current_date, next_date|
+      if next_date == current_date + 1
+        current += 1
+        longest = current if current > longest
+      else
+        current = 1
+      end
+    end
 
-  def current_streak
-    # IMPLEMENT
+    longest
   end
+  
+  def current_streak
+    date_set = activities.pluck(:occurred_on).to_set
+    count    = 0
+    day      = Date.today
+  
+    while date_set.include?(day)
+      count += 1
+      day   -= 1
+    end
+  
+    count
+  end 
 end

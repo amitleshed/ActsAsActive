@@ -68,4 +68,16 @@ class ActsAsActiveTest < Minitest::Test
 
     assert_equal({}, @note.heatmap(range: range))
   end
+
+  def test_longest_and_current_streaks
+    @note = Note.create!(title: "Streak")
+
+    [1,2,3].each { |day| @note.activities.create!(occurred_on: Date.new(2025, 8, day)) }
+    [5,6].each   { |day| @note.activities.create!(occurred_on: Date.new(2025, 8, day)) }
+
+    Date.stub(:today, Date.new(2025,8,6)) do
+      assert_equal 3, @note.longest_streak
+      assert_equal 2, @note.current_streak
+    end
+  end
 end
