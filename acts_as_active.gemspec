@@ -3,20 +3,20 @@
 require_relative "lib/acts_as_active/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "acts_as_active"
+  spec.name    = "acts_as_active"
   spec.version = ActsAsActive::VERSION
   spec.authors = ["Amit Leshed"]
-  spec.email = ["amitleshed@icloud.com"]
+  spec.email   = ["amitleshed@icloud.com"]
 
-  spec.summary = "test"
-  spec.description = "test"
-  spec.homepage = "https://www.amitleshed.com"
-  spec.license = "MIT"
+  spec.summary     = "Daily activity & streak tracking for AR models"
+  spec.description = "Acts As Active let's you track activity on any given model, so statistics, streak and data visualizations are easy."
+  spec.homepage    = "https://www.amitleshed.com"
+  spec.license     = "MIT"
   spec.required_ruby_version = ">= 3.2.0"
 
-  spec.metadata["allowed_push_host"] = "test"
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://www.amitleshed.com"
+  # spec.metadata["allowed_push_host"] = "test"
+  spec.metadata["homepage_uri"]      = spec.homepage
+  spec.metadata["source_code_uri"]   = "https://www.amitleshed.com"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
