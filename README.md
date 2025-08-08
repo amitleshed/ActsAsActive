@@ -49,7 +49,7 @@ record.current_streak   # => 2   (e.g. active 5-6 Aug, still “on a streak” t
 ## Run Tests
 
 ```bash
-  ruby -Ilib:ruby test/test_acts_as_active.rb
+ruby -Ilib:ruby test/test_acts_as_active.rb
 ```
 
 ## Contributing
