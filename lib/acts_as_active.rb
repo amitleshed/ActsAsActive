@@ -6,5 +6,4 @@ require "acts_as_active/railtie" if defined?(Rails)
 
 module ActsAsActive
   class Error < StandardError; end
-  # Your code goes here...
 end

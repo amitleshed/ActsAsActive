@@ -8,15 +8,15 @@ Gem::Specification.new do |spec|
   spec.authors = ["Amit Leshed"]
   spec.email   = ["amitleshed@icloud.com"]
 
-  spec.summary     = "Daily activity & streak tracking for AR models"
-  spec.description = "Acts As Active let's you track activity on any given model, so statistics, streak and data visualizations are easy."
+  spec.summary     = "Track activity and generate streaks, heatmaps, and visualizations for ActiveRecord models"
+  spec.description = "Acts As Active is a tracker and activity generator for any ActiveRecord model, making it easy to generate statistics, streaks, and data visualization."
   spec.homepage    = "https://www.amitleshed.com"
   spec.license     = "MIT"
   spec.required_ruby_version = ">= 3.2.0"
 
   # spec.metadata["allowed_push_host"] = "test"
   spec.metadata["homepage_uri"]      = spec.homepage
-  spec.metadata["source_code_uri"]   = "https://www.amitleshed.com"
+  spec.metadata["source_code_uri"]   = "https://github.com/amitleshed/acts_as_active"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
