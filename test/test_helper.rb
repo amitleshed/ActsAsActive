@@ -6,7 +6,7 @@ require "minitest/autorun"
 require "active_record"
 require "active_support/testing/time_helpers"
 require "logger"
-require_relative "../lib/acts_as_active/concern"
+require_relative "../lib/acts_as_active/activable"
 
 class Minitest::Test
   include ActiveSupport::Testing::TimeHelpers
