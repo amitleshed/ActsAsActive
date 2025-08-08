@@ -46,6 +46,12 @@ record.longest_streak   # => 3   (e.g. active 1-3 Aug)
 record.current_streak   # => 2   (e.g. active 5-6 Aug, still “on a streak” today)
 ```
 
+## Run Tests
+
+```bash
+  ruby -Ilib:ruby test/test_acts_as_active.rb
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/amitleshed/acts_as_active. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/amitleshed/acts_as_active/blob/main/CODE_OF_CONDUCT.md).
