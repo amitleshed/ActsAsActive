@@ -1,6 +1,8 @@
 # ActsAsActive
 
-Acts As Active adds plug-and-play activity tracking to any ActiveRecord model, giving you instant daily stats, streak analytics, and heat-map–ready data.
+Acts As Active adds plug-and-play activity tracking to any ActiveRecord model, giving you instant daily stats, streak analytics, and heatmap-ready data.
+
+It works by automatically establishing a polymorphic association with your model and generating an Activity record for each specified lifecycle event.
 
 ## Installation
 
