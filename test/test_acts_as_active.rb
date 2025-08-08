@@ -80,4 +80,29 @@ class ActsAsActiveTest < Minitest::Test
       assert_equal 2, @note.current_streak
     end
   end
+
+  def test_acts_as_active_if_condition_blocks_activity
+    note = ConditionalNote.new(title: "Should not track")
+    note.track_activity = false
+    note.save!
+  
+    assert_equal 0, note.activities.count, "Activity should not be recorded when `if:` is false"
+  end
+  
+  def test_acts_as_active_unless_condition_blocks_activity
+    note = ConditionalNote.new(title: "Should not track")
+    note.skip_tracking = true
+    note.save!
+  
+    assert_equal 0, note.activities.count, "Activity should not be recorded when `unless:` is true"
+  end
+  
+  def test_acts_as_active_records_activity_when_conditions_pass
+    note = ConditionalNote.new(title: "Should track")
+    note.track_activity = true
+    note.skip_tracking = false
+    note.save!
+  
+    assert_equal 1, note.activities.count, "Activity should be recorded when conditions pass"
+  end  
 end

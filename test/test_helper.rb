@@ -30,6 +30,11 @@ ActiveRecord::Schema.define do
     t.string :title
     t.timestamps
   end
+
+  create_table :conditional_notes, force: true do |t|
+    t.string :title
+    t.timestamps
+  end
 end
 
 class Activity < ActiveRecord::Base
@@ -38,4 +43,26 @@ end
 
 class Note < ActiveRecord::Base
   acts_as_active
+end
+
+class ConditionalNote < ActiveRecord::Base
+  acts_as_active on: [:create, :update],
+                 if:     -> { track_activity? },
+                 unless: -> { skip_tracking? }
+
+  def track_activity?
+    @track_activity != false
+  end
+
+  def skip_tracking?
+    @skip_tracking == true
+  end
+
+  def track_activity=(value)
+    @track_activity = value
+  end
+
+  def skip_tracking=(value)
+    @skip_tracking = value
+  end
 end

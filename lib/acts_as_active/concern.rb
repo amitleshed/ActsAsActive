@@ -14,10 +14,14 @@ module ActsAsActive
     def acts_as_active(options = {})
       has_many :activities, as: :trackable, class_name: "Activity"
 
-      events = Array(options[:on] || SUPPORTED_EVENTS) & SUPPORTED_EVENTS
+      events      = Array(options[:on] || SUPPORTED_EVENTS) & SUPPORTED_EVENTS
       events.each do |ev|
         after_commit on: ev do |_ignored|
-          record_activity!
+          should_run = true
+          should_run &&=  instance_exec(&options[:if])     if options[:if]
+          should_run &&= !instance_exec(&options[:unless]) if options[:unless]
+
+          record_activity! if should_run
         end
       end
     end

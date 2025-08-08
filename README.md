@@ -20,7 +20,9 @@ gem install acts_as_active
 
 ```ruby
 class Record < ApplicationRecord
-  acts_as_active on: [:create, :update]
+  acts_as_active on: [:create, :update],          # ➜ Track different actions
+                 if:     -> { track_activity? },  # ➜ On different conditions
+                 unless: -> { skip_tracking? }
 end
 ```
 
