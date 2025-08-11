@@ -14,7 +14,9 @@ module ActsAsActive
     def acts_as_active(options = {})
       has_many :activities, as: :trackable, class_name: "ActsAsActive::Activity"
 
-      events      = Array(options[:on] || SUPPORTED_EVENTS) & SUPPORTED_EVENTS
+      @acts_as_active_after_record = options[:after_record]
+      events = Array(options[:on] || SUPPORTED_EVENTS) & SUPPORTED_EVENTS
+
       events.each do |ev|
         after_commit on: ev do |_ignored|
           should_run = true
@@ -24,6 +26,10 @@ module ActsAsActive
           record_activity! if should_run
         end
       end
+    end
+
+    def acts_as_active_after_record
+      @acts_as_active_after_record
     end
   end
 
@@ -35,6 +41,11 @@ module ActsAsActive
     activity.count ||= 0
     activity.count  += 1
     activity.save!
+
+    hook = self.class.acts_as_active_after_record
+    hook&.call(activity)
+    
+    activity
   end
 end
 
