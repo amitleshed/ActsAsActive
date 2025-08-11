@@ -47,6 +47,16 @@ record.longest_streak   # => 3   (e.g. active 1-3 Aug)
 record.current_streak   # => 2   (e.g. active 5-6 Aug, still “on a streak” today)
 ```
 
+## Accessing Activities
+
+```ruby
+record = Record.find(1) 
+record.activities  # Accessing activities for a model that includes ActsAsActive
+
+ActsAsActive::Activity.where(trackable: record)  # Query the namespaced model directly
+ActsAsActive::Activity.all                       # Get all activities across all trackable types
+```
+
 ## Run Tests
 
 ```bash
