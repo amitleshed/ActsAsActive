@@ -17,14 +17,16 @@ ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:"
 ActiveRecord::Base.logger = Logger.new(nil)
 
 ActiveRecord::Schema.define do
-  create_table :activities, force: true do |t|
-    t.string  :trackable_type, null: false
-    t.integer :trackable_id,   null: false
-    t.date    :occurred_on,    null: false
-    t.integer :count,          default: 0, null: false
+  create_table :acts_as_active_activities do |t|
+    t.string     :trackable_type, null: false
+    t.bigint     :trackable_id,   null: false
+    t.references :actor, polymorphic: true, null: true
+    t.date       :occurred_on,    null: false
+    t.integer    :count,          null: false, default: 0
+
     t.timestamps
   end
-  add_index :activities, [:trackable_type, :trackable_id, :occurred_on], unique: true
+  add_index :acts_as_active_activities, [:trackable_type, :trackable_id, :occurred_on], unique: true, name: "index_activities_on_trackable_and_occurred_on"
 
   create_table :notes, force: true do |t|
     t.string :title
@@ -37,8 +39,12 @@ ActiveRecord::Schema.define do
   end
 end
 
-class Activity < ActiveRecord::Base
-  belongs_to :trackable, polymorphic: true
+module ActsAsActive
+  class Activity < ActiveRecord::Base
+    self.table_name = "acts_as_active_activities"
+
+    belongs_to :trackable, polymorphic: true
+  end
 end
 
 class Note < ActiveRecord::Base

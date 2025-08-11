@@ -3,7 +3,7 @@ require_relative "test_helper"
 
 class ActsAsActiveTest < Minitest::Test
   def setup
-    Activity.delete_all
+    ActsAsActive::Activity.delete_all
     Note.delete_all
     hash_setup
   end
