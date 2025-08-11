@@ -12,7 +12,7 @@ module ActsAsActive
     SUPPORTED_EVENTS = %i[create update destroy].freeze
 
     def acts_as_active(options = {})
-      has_many :activities, as: :trackable, class_name: "Activity"
+      has_many :activities, as: :trackable, class_name: "ActsAsActive::Activity"
 
       events      = Array(options[:on] || SUPPORTED_EVENTS) & SUPPORTED_EVENTS
       events.each do |ev|

@@ -19,9 +19,14 @@ module ActsAsActive
       end
 
       def create_model
-        create_file "app/models/activity.rb", <<~RUBY
-          class Activity < ApplicationRecord
-            belongs_to :trackable, polymorphic: true, class_name: "Activity"
+        create_file "app/models/acts_as_active/activity.rb", <<~RUBY
+          module ActsAsActive
+            class Activity < ApplicationRecord
+              self.table_name = "acts_as_active_activities"
+
+              belongs_to :trackable, polymorphic: true
+              belongs_to :actor, polymorphic: true, optional: true
+            end
           end
         RUBY
       end
