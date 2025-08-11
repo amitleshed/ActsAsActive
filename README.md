@@ -22,15 +22,16 @@ gem install acts_as_active
 
 ```ruby
 class Record < ApplicationRecord
-  acts_as_active on: [:create, :update],          # ➜ track different actions
-                 if:     -> { track_activity? },  # ➜ on different conditions
-                 unless: -> { skip_tracking? }
+  acts_as_active on: [:create, :update],                 # ➜ Track different actions
+                 if:           -> { track_activity? },   # ➜ On different conditions
+                 unless:       -> { skip_tracking? },
+                 after_record: -> ( activity ) { puts "Modified: #{activity}" }   # ➜ Hook: runs after an activity is created or updated
 end
 ```
 
 ```ruby
-record = Record.create!(title: "First draft")   # ➜ records activity for today
-record.update!(title: "Second draft")           # ➜ activity count for today = 2
+record = Record.create!(title: "First draft")   # ➜ Records activity for today
+record.update!(title: "Second draft")           # ➜ Activity count for today = 2
  
 
 record.active_today?                # => true
