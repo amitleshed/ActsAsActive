@@ -18,6 +18,12 @@ If bundler is not being used to manage dependencies, install the gem by executin
 gem install acts_as_active
 ```
 
+Generators: ActsAsActive supports a metadata field in either json or jsonb format, depending on your database and preference (MySQL or PostgreSQL).
+
+```bash
+rails g acts_as_active:install --metadata=json/jsonb/auto
+```
+
 ## Usage
 
 ```ruby
@@ -25,7 +31,7 @@ class Record < ApplicationRecord
   acts_as_active on: [:create, :update],                 # ➜ Track different actions
                  if:           -> { track_activity? },   # ➜ On different conditions
                  unless:       -> { skip_tracking? },
-                 after_record: -> ( activity ) { puts "Modified: #{activity}" }   # ➜ Hook: runs after an activity is created or updated
+                 after_record: -> (activity) { activity.update(metadata: {be: "BOP!"}) }   # ➜ Hook: runs after an activity is created or updated
 end
 ```
 
@@ -55,6 +61,40 @@ record.activities  # Accessing activities for a model that includes ActsAsActive
 
 ActsAsActive::Activity.where(trackable: record)  # Query the namespaced model directly
 ActsAsActive::Activity.all                       # Get all activities across all trackable types
+```
+
+## Metadata usage
+
+PostgreSQL
+
+```ruby
+# Where metadata contains key/value
+ActsAsActive::Activity.where("metadata @> ?", { source: "api" }.to_json)
+
+# Where nested key/value
+ActsAsActive::Activity.where("metadata @> ?", { user: { id: 42 } }.to_json)
+```
+
+MySQL/SQLite
+
+```ruby
+# MySQL: Find where metadata->source == 'api'
+ActsAsActive::Activity.where("JSON_UNQUOTE(JSON_EXTRACT(metadata, '$.source')) = ?", "api")
+
+# SQLite (with JSON1 extension):
+ActsAsActive::Activity.where("json_extract(metadata, '$.source') = ?", "api")
+```
+
+Writing to metadata
+
+```ruby
+activity.update!(
+  metadata: {
+    source: "api",
+    user: { id: 42, name: "Amit" },
+    tags: ["Dig", "Be", "Bop"]
+  }
+)
 ```
 
 ## Run Tests
